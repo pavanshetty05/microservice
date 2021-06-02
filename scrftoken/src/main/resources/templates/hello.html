@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+ </head>
+<body> 
+<h1> This is the user</h1>
+<form action="/useData" method="post">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <input type="hidden"
+	th:name="${_csrf.parameterName}"
+	th:value="${_csrf.token}"/>
+  <input type="submit" value="Submit">
+</form> 
+</body>
+</html>
