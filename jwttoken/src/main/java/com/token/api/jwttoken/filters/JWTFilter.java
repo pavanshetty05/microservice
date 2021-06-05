@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.*;  
@@ -20,7 +21,7 @@ import com.token.api.jwttoken.service.MyUserDetailsService;
 import com.token.api.jwttoken.utility.JwttokenUtiulity;
 
 
-//@Service
+@Component
 public class JWTFilter extends OncePerRequestFilter{
 	
 	@Autowired
@@ -35,8 +36,7 @@ public class JWTFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		
 		
-		String autToken=request.getParameter("Authorization");
-		
+		String autToken=request.getHeader("Authorization");
 		if(autToken != null && autToken.startsWith("Bearer "))
 		{
 			
@@ -55,6 +55,10 @@ public class JWTFilter extends OncePerRequestFilter{
 					SecurityContextHolder.getContext().setAuthentication(ouserName);
 				}
 			}
+			filter.doFilter(request, response);
+		}else if(request.getRequestURI().contains("/generatetoken"))
+		{  
+			// this is a temp Fix
 			filter.doFilter(request, response);
 		}
 		
