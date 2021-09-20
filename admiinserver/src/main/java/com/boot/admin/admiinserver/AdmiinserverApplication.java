@@ -10,6 +10,7 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 public class AdmiinserverApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Just code check");
 		SpringApplication.run(AdmiinserverApplication.class, args);
 	}
 
